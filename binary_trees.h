@@ -113,4 +113,7 @@ heap_t *array_to_heap(int *array, size_t size);
 int heap_extract(heap_t **root);
 int *heap_to_sorted_array(heap_t *heap, size_t *size);
 
+avl_t *avl_node(avl_t *parent, int value);
+
+
 #endif /* _BINARY_TREES_H_ */
