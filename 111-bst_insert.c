@@ -15,9 +15,12 @@ bst_t *bst_insert(bst_t **tree, int value)
         return (NULL);
 
     /* Create a new node */
-    new_node = binary_tree_node(NULL, value);
+    new_node = malloc(sizeof(bst_t));
     if (new_node == NULL)
         return (NULL);
+    new_node->n = value;
+    new_node->left = NULL;
+    new_node->right = NULL;
 
     /* If tree is empty, set the new node as root */
     if (*tree == NULL)
@@ -57,4 +60,3 @@ bst_t *bst_insert(bst_t **tree, int value)
 
     return (new_node);
 }
-
