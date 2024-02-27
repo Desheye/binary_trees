@@ -18,6 +18,9 @@ int main(void)
     tree = array_to_bst(array, n);
     if (!tree)
         return (1);
-    binary_tree_print(tree);
+
+    // Cast the bst_t pointer to binary_tree_t before passing to binary_tree_print
+    binary_tree_print((const binary_tree_t *)tree);
+
     return (0);
 }
