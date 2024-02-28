@@ -10,28 +10,27 @@
  */
 binary_tree_t *binary_tree_insert_left(binary_tree_t *parent, int value)
 {
-    binary_tree_t *new_node;
+	binary_tree_t *new_node;
 
-    if (parent == NULL)
-        return (NULL);
+	if (parent == NULL)
+		return (NULL);
 
-    /* Create new node */
-    new_node = binary_tree_node(parent, value);
-    if (new_node == NULL)
-        return (NULL);
+	/* Create new node */
+	new_node = binary_tree_node(parent, value);
+	if (new_node == NULL)
+		return (NULL);
 
-    /* If parent already has a left-child */
-    if (parent->left != NULL)
-    {
-        /* Make new node's left-child point to parent's current left-child */
-        new_node->left = parent->left;
-        /* Update parent's current left-child's parent to be the new node */
-        parent->left->parent = new_node;
-    }
+	/* If parent already has a left-child */
+	if (parent->left != NULL)
+	{
+		/* Make new node's left-child point to parent's current left-child */
+		new_node->left = parent->left;
+		/* Update parent's current left-child's parent to be the new node */
+		parent->left->parent = new_node;
+	}
 
-    /* Make parent's left-child point to the new node */
-    parent->left = new_node;
+	/* Make parent's left-child point to the new node */
+	parent->left = new_node;
 
-    return (new_node);
+	return (new_node);
 }
-
