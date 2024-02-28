@@ -4,7 +4,7 @@
  * binary_tree_postorder - Goes through a binary tree using post-order traversal
  * @tree: Pointer to the root node of the tree to traverse
  * @func: Pointer to a function to call for each node
- *        The value in the node must be passed as a parameter to this function
+ *        The value in the node passed to this function
  */
 void binary_tree_postorder(const binary_tree_t *tree, void (*func)(int))
 {
@@ -17,6 +17,5 @@ void binary_tree_postorder(const binary_tree_t *tree, void (*func)(int))
 	/* Recursively traverse the right subtree */
 	binary_tree_postorder(tree->right, func);
 
-	/* Call the function with the value of the current node */
 	func(tree->n);
 }
