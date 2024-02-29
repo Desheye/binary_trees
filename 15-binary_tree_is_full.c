@@ -9,20 +9,14 @@
  */
 int binary_tree_is_full(const binary_tree_t *tree)
 {
-    /* If the tree is empty, it's full by definition */
-    if (tree == NULL)
-        return (0);
+	if (tree == NULL)
+		return (0);
 
-    /* If both children are NULL, it's a leaf and full by definition */
-    if (tree->left == NULL && tree->right == NULL)
-        return (1);
+	if (tree->left == NULL && tree->right == NULL)
+		return (1);
 
-    /* If both children are present, check recursively */
-    if (tree->left && tree->right)
-        return (binary_tree_is_full(tree->left) &&
-                binary_tree_is_full(tree->right));
+	if (tree->left && tree->right)
+		return (binary_tree_is_full(tree->left) && binary_tree_is_full(tree->right));
 
-    /* If one child is present and the other is missing, it's not full */
-    return (0);
+	return (0);
 }
-
