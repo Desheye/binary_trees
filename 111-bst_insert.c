@@ -1,5 +1,9 @@
 #include "binary_trees.h"
 
+/* Declare function prototypes */
+static bst_t *create_bst_node(int value);
+static bst_t *bst_insert_recursive(bst_t *tree, int value);
+
 /**
  * bst_insert - Inserts a value in a Binary Search Tree
  * @tree: A double pointer to the root node of the BST to insert the value
@@ -9,54 +13,57 @@
  */
 bst_t *bst_insert(bst_t **tree, int value)
 {
-    bst_t *new_node, *current_node, *parent_node;
+	if (tree == NULL)
+		return (NULL);
 
-    if (tree == NULL)
-        return (NULL);
+	if (*tree == NULL)
+	{
+		*tree = create_bst_node(value);
+		return (*tree);
+	}
 
-    /* Create a new node */
-    new_node = malloc(sizeof(bst_t));
-    if (new_node == NULL)
-        return (NULL);
-    new_node->n = value;
-    new_node->left = NULL;
-    new_node->right = NULL;
+	return (bst_insert_recursive(*tree, value));
+}
 
-    /* If tree is empty, set the new node as root */
-    if (*tree == NULL)
-    {
-        *tree = new_node;
-        return (new_node);
-    }
+/**
+ * create_bst_node - Creates a new node for a binary search tree
+ * @value: The value to store in the node
+ *
+ * Return: A pointer to the created node, or NULL on failure
+ */
+static bst_t *create_bst_node(int value)
+{
+	bst_t *new_node = malloc(sizeof(bst_t));
 
-    current_node = *tree;
-    while (current_node != NULL)
-    {
-        parent_node = current_node;
+	if (new_node == NULL)
+		return (NULL);
 
-        /* If value is already present, ignore and return NULL */
-        if (value == current_node->n)
-        {
-            free(new_node);
-            return (NULL);
-        }
+	new_node->n = value;
+	new_node->left = NULL;
+	new_node->right = NULL;
 
-        /* Move to the left child if value is less than current node */
-        if (value < current_node->n)
-            current_node = current_node->left;
-        /* Move to the right child if value is greater than current node */
-        else
-            current_node = current_node->right;
-    }
+	return (new_node);
+}
 
-    /* Set the parent of the new node */
-    new_node->parent = parent_node;
-    
-    /* Insert the new node as left or right child of its parent */
-    if (value < parent_node->n)
-        parent_node->left = new_node;
-    else
-        parent_node->right = new_node;
+/**
+ * bst_insert_recursive - Inserts a value recursively into a binary search tree
+ * @tree: A pointer to the root node of the BST
+ * @value: The value to insert
+ *
+ * Return: A pointer to the created node, or NULL on failure
+ */
+static bst_t *bst_insert_recursive(bst_t *tree, int value)
+{
+	if (tree == NULL)
+		return (create_bst_node(value));
 
-    return (new_node);
+	if (value == tree->n)
+		return (NULL); /* Value already exists */
+
+	if (value < tree->n)
+		tree->left = bst_insert_recursive(tree->left, value);
+	else
+		tree->right = bst_insert_recursive(tree->right, value);
+
+	return (tree);
 }
