@@ -1,5 +1,5 @@
 #include "binary_trees.h"
-#include <limits.h> // Include for INT_MIN and INT_MAX
+#include <limits.h> /* Include for INT_MIN and INT_MAX */
 
 /**
  * is_bst_util - Utility function to check if a binary tree is a valid BST
@@ -11,14 +11,18 @@
  */
 int is_bst_util(const binary_tree_t *tree, int min, int max)
 {
-    if (tree == NULL)
-        return (1);
+	int left_valid, right_valid;
 
-    if (tree->n < min || tree->n > max)
-        return (0);
+	if (tree == NULL)
+		return (1);
 
-    return (is_bst_util(tree->left, min, tree->n - 1) &&
-            is_bst_util(tree->right, tree->n + 1, max));
+	if (tree->n < min || tree->n > max)
+		return (0);
+
+	left_valid = is_bst_util(tree->left, min, tree->n - 1);
+	right_valid = is_bst_util(tree->right, tree->n + 1, max);
+
+	return (left_valid && right_valid);
 }
 
 /**
@@ -29,9 +33,8 @@ int is_bst_util(const binary_tree_t *tree, int min, int max)
  */
 int binary_tree_is_bst(const binary_tree_t *tree)
 {
-    if (tree == NULL)
-        return (0);
+	if (tree == NULL)
+		return (0);
 
-    return (is_bst_util(tree, INT_MIN, INT_MAX));
+	return (is_bst_util(tree, INT_MIN, INT_MAX));
 }
-
