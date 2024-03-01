@@ -1,3 +1,4 @@
+#include "binary_trees.h"
 /**
  * binary_trees_ancestor - Finds the lowest common ancestor of two nodes.
  * @first: A pointer to the first node.
@@ -7,7 +8,7 @@
  *         or NULL if no common ancestor was found.
  */
 binary_tree_t *binary_trees_ancestor(const binary_tree_t *first,
-                                     const binary_tree_t *second)
+const binary_tree_t *second)
 {
 	const binary_tree_t *temp1 = first, *temp2 = second;
 
